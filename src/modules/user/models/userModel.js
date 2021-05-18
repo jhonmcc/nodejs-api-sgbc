@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const bdInstance = require('../../../bd/bdConfig')
 
 const cols = {
     id: {
@@ -25,3 +26,11 @@ const cols = {
         allowNull: false
     }
 }
+
+const options = {
+    freezeTableName = true, 
+    tableName: 'users',
+    timestamps: true
+}
+
+module.exports = bdInstance.define('users', cols, options)

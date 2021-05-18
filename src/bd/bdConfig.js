@@ -9,3 +9,5 @@ const instance = new Sequelize(
         dialect: process.env.DIALECT_BD
     }
 )
+
+module.exports = instance
