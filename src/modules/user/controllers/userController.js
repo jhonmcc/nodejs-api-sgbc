@@ -1,0 +1,2 @@
+const userMethods = require('./userMethods')
+
