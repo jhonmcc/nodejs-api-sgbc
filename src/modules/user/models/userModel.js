@@ -28,7 +28,7 @@ const cols = {
 }
 
 const options = {
-    freezeTableName = true, 
+    // freezeTableName = true, 
     tableName: 'users',
     timestamps: true
 }
