@@ -40,7 +40,7 @@ const cols = {
         allowNull: false
     },
     deleted_at: {
-        type: Sequelize.TIME,
+        type: 'DATETIME',
         allowNull: false
     }
 }
