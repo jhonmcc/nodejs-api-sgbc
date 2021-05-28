@@ -12,17 +12,35 @@ const cols = {
         type: Sequelize.STRING,
         allowNull: false
     },
-    name: {
+    user: {
         type: Sequelize.STRING,
         allowNull: false,
 
     },
-    emailUser: {
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+
+    },
+    email: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    passUser: {
+    full_name: {
         type: Sequelize.STRING,
+        allowNull: false,
+
+    },
+    access: {
+        type: Sequelize.TINYINT,
+        allowNull: false
+    },
+    active: {
+        type: Sequelize.TINYINT,
+        allowNull: false
+    },
+    deleted_at: {
+        type: Sequelize.TIME,
         allowNull: false
     }
 }
