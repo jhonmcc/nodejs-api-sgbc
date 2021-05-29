@@ -1,5 +1,5 @@
 const routerClient = require('express').Router()
-const userMethods = require('../modules/user/controllers/userMethods')
+const userController = require('../modules/user/controllers/userController')
 
 routerClient.get('/', async (req, res) => {
     // const results = await userMethods.listar()
