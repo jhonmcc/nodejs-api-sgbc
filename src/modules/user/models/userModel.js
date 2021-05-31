@@ -41,7 +41,6 @@ const cols = {
     },
     deleted_at: {
         type: 'DATETIME',
-        allowNull: false
     }
 }
 
