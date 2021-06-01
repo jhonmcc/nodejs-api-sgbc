@@ -13,17 +13,30 @@ module.exports = {
                 access: req.body.access,
                 active: req.body.active
             })
+            return resCreate
         } catch (error) {
-            
+            console.log(error)
+            return false
         }
     },
-    async updateUser(){
-    return ''
+    async updateUser(req){
+        try {
+            const resUpdate = await this.findUser(req)
+            console.log(resUpdate)
+        } catch (error) {
+            console.log(error)
+            return error   
+        }
     },
     async deleteUser(){
         return ''
     },
-    async findUser(){
-        return userModel.findAll()
+    async findUser(req){
+        try {
+            const findOne = await userModel.findOne({where: {user: req.body.user}}) 
+            return findOne
+        } catch (error) {
+            return error
+        }
     }
 }
