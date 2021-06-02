@@ -21,15 +21,32 @@ module.exports = {
     },
     async updateUser(req){
         try {
-            const resUpdate = await this.findUser(req)
-            console.log(resUpdate)
+            const resFind = await this.findUser(req)
+            resFind.user = req.body.user
+            resFind.password = req.body.password
+            resFind.email = req.body.email
+            resFind.full_name = req.body.full_name
+            resFind.active = req.body.access
+            resFind.active = req.body.active
+
+            const resUpdate = await resFind.save()
+            return resUpdate
         } catch (error) {
             console.log(error)
-            return error   
+            return false
         }
     },
-    async deleteUser(){
-        return ''
+    async deleteUser(req){
+        try {
+            const resDelete = await this.findUser(req)
+            resDelete.active = 0
+            resDelete.deleteAt = Date.now()
+            const resUpdate = await resDelete.save()
+            return resUpdate
+        } catch (error) {
+            console.log(error)
+            return false
+        }
     },
     async findUser(req){
         try {
@@ -37,6 +54,14 @@ module.exports = {
             return findOne
         } catch (error) {
             return error
+        }
+    },
+    async login(req){
+        try {
+            // token
+        } catch (error) {
+            console.log(error)
+            return false
         }
     }
 }
