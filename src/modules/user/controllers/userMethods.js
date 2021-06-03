@@ -40,7 +40,8 @@ module.exports = {
         try {
             const resDelete = await this.findUser(req)
             resDelete.active = 0
-            resDelete.deleteAt = Date.now()
+            resDelete.deletedAt = new Date().toString()
+            console.log(resDelete)
             const resUpdate = await resDelete.save()
             return resUpdate
         } catch (error) {
@@ -50,7 +51,16 @@ module.exports = {
     },
     async findUser(req){
         try {
-            const findOne = await userModel.findOne({where: {user: req.body.user}}) 
+            const findOne = await userModel.findOne({where: {user: req.body.user}})
+            console.log(findOne)
+            return findOne
+        } catch (error) {
+            return error
+        }
+    },
+    async findAll(req){
+        try {
+            const findOne = await userModel.findAll()
             return findOne
         } catch (error) {
             return error

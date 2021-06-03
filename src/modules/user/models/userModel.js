@@ -39,7 +39,7 @@ const cols = {
         type: Sequelize.TINYINT,
         allowNull: false
     },
-    deleted_at: {
+    deletedAt: {
         type: 'DATETIME',
     }
 }

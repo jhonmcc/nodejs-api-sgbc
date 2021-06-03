@@ -1,3 +1,4 @@
+const { login } = require('./userMethods')
 const userMethods = require('./userMethods')
 
 module.exports = {
@@ -23,7 +24,15 @@ module.exports = {
         }
         res.send({ delete: 'success' })
     },
-    async find(){
-        await userMethods.findUser()
+    async find(req, res){
+        // await userMethods.findUser(req)
+        let result = await userMethods.findAll()
+        if (result == false){
+            res.send({ message: 'Nao foi possivel localizar o usuario ou senha estao incorretos.'})
+        }
+        res.status(200).json(result)
+    },
+    async login(req, res){
+        return ''
     }
 }
