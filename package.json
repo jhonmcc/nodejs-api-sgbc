@@ -24,9 +24,7 @@
     "sequelize": "^6.6.2",
     "sqlite3": "^5.0.2",
     "tedious": "^11.0.8",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
+    "uuid": "^8.3.2",
     "dot-env": "0.0.1"
   }
 }
