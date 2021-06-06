@@ -32,7 +32,7 @@ module.exports = {
         }
         res.status(200).json(result)
     },
-    async login(req, res){
+    async login(req, res, next){
         return ''
     }
 }
