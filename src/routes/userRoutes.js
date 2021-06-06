@@ -25,8 +25,7 @@ routesUser.delete('/', async (req, res) => {
     await userController.delete(req, res)
 })
 routesUser.post('/login', async (req, res, next) =>{
-    // fazer consulta ao banco
-    
+    await userController.login(req, res, next)    
 })
 
 module.exports = routesUser

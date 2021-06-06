@@ -1,4 +1,3 @@
-const { login } = require('./userMethods')
 const userMethods = require('./userMethods')
 
 module.exports = {
@@ -33,6 +32,7 @@ module.exports = {
         res.status(200).json(result)
     },
     async login(req, res, next){
+        const user = await userMethods.login(req)
         return ''
     }
 }

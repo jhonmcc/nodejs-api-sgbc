@@ -72,7 +72,7 @@ module.exports = {
     },
     async login(req){
         try {
-            // token
+            const resUser = this.findUser(req)
         } catch (error) {
             console.log(error)
             return false
