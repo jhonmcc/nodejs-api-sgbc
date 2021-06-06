@@ -1,5 +1,9 @@
 const userModel = require('../models/userModel')
 const uuid = require('uuid')
+const jwt = require('jsonwebtoken')
+
+// require dotenv 
+require('dot-env').config()
 
 module.exports = {
     async createUser(req){
