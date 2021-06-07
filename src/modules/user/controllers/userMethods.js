@@ -71,11 +71,11 @@ module.exports = {
     },
     async login(req){
         try {
-            const resUser = this.findUser(req)
+            const resUser = await this.findUser(req)
             if (resUser == null){
                 return false
             }
-            else if (resUser.user === req.body.user){
+            else if (resUser.user == req.body.user){
                 // call method to generated token
             }
             return true
