@@ -18,13 +18,13 @@
   },
   "homepage": "https://github.com/jhonmcc/nodejs-api-sgbc#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.2",
     "sqlite3": "^5.0.2",
     "tedious": "^11.0.8",
-    "uuid": "^8.3.2",
-    "dot-env": "0.0.1"
+    "uuid": "^8.3.2"
   }
 }

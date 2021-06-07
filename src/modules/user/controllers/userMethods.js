@@ -3,7 +3,7 @@ const uuid = require('uuid')
 const jwt = require('jsonwebtoken')
 
 // require dotenv 
-require('dot-env').config()
+require('dotenv').config()
 
 module.exports = {
     async createUser(req){
@@ -56,7 +56,6 @@ module.exports = {
     async findUser(req){
         try {
             const findOne = await userModel.findOne({where: {user: req.body.user}})
-            console.log(findOne)
             return findOne
         } catch (error) {
             return error
@@ -73,6 +72,13 @@ module.exports = {
     async login(req){
         try {
             const resUser = this.findUser(req)
+            if (resUser == null){
+                return false
+            }
+            else if (resUser.user === req.body.user){
+                // call method to generated token
+            }
+            return true
         } catch (error) {
             console.log(error)
             return false
