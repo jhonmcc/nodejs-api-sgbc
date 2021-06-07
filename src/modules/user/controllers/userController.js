@@ -4,7 +4,7 @@ module.exports = {
     async create(req, res){
         let result = await userMethods.createUser(req)
         if (result == false){
-            res.send({message: 'Nao foi possivel efetuar o cadastro campos imcompletos.'})
+            res.send({message: 'Nao foi possivel efetuar o cadastro campos imcompletos ou o cadastro ja existe'})
         }
         
         res.send({create: 'success'})

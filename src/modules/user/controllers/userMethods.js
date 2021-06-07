@@ -1,6 +1,7 @@
 const userModel = require('../models/userModel')
 const uuid = require('uuid')
 const jwt = require('jsonwebtoken')
+const { Op } = require('sequelize')
 
 // require dotenv 
 require('dotenv').config()
@@ -8,15 +9,27 @@ require('dotenv').config()
 module.exports = {
     async createUser(req){
         try {
-            const resCreate = await userModel.create({
-                uuid: uuid.v4(),
-                user: req.body.user,
-                password: req.body.password,
-                email: req.body.email,
-                full_name: req.body.full_name,
-                access: req.body.access,
-                active: req.body.active
+            // const resCreate = await userModel.create({
+            console.log(req.body)
+            const [resCreate, created] = await userModel.findOrCreate({
+                where: {
+                    [Op.or]: [
+                        { user: req.body.user },
+                        { email: req.body.email }
+                    ]},
+                defaults: {
+                    uuid: uuid.v4(),
+                    user: req.body.user,
+                    password: req.body.password,
+                    email: req.body.email,
+                    full_name: req.body.full_name,
+                    access: req.body.access,
+                    active: req.body.active
+                }
             })
+            if (created == false){
+                return false
+            }
             return resCreate
         } catch (error) {
             console.log(error)
