@@ -33,9 +33,10 @@ module.exports = {
     },
     async login(req, res, next){
         const result = await userMethods.login(req)
+        console.log(result)
         if (result == false){
             res.status(400).json({ message: 'Usuario ou Senha invalidos'})
         }
-        res.send({ login: 'ok'})
+        res.status(200).json(result)
     }
 }

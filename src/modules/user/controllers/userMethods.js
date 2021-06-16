@@ -88,10 +88,16 @@ module.exports = {
             if (resUser == null){
                 return false
             }
-            else if (resUser.user == req.body.user){
-                // call method to generated token
+            else if (resUser.password == req.body.password){
+                const token = jwt.sign({id: resUser.id}, process.env.SECRET, {
+                    expiresIn: '1m'
+                    // expiresIn: 10
+                })
+
+                return { auth: true, token: token }
             }
-            return true
+
+            return false
         } catch (error) {
             console.log(error)
             return false
