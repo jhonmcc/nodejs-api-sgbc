@@ -1,3 +1,4 @@
+const { verifyToken } = require('./userMethods')
 const userMethods = require('./userMethods')
 
 module.exports = {
@@ -31,12 +32,25 @@ module.exports = {
         }
         res.status(200).json(result)
     },
-    async login(req, res, next){
+    async login(req, res){
         const result = await userMethods.login(req)
-        console.log(result)
         if (result == false){
             res.status(400).json({ message: 'Usuario ou Senha invalidos'})
         }
         res.status(200).json(result)
+    },
+    async verifyToken(req, res){
+        const token = await userMethods.verifyToken(req)
+        if (token == false){
+            res.status(401).json({ message: 'Token nao fornecido'})
+        }
+
+        const validate = await userMethods.validateToken(token)
+        if (validate == false){
+            console.log(validate)
+            res.status(401).json({ message: 'Falha na autenticacao do token'})
+        }
+        return validate
     }
+
 }

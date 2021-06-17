@@ -89,8 +89,8 @@ module.exports = {
                 return false
             }
             else if (resUser.password == req.body.password){
-                const token = jwt.sign({id: resUser.id}, process.env.SECRET, {
-                    expiresIn: '1m'
+                const token = jwt.sign({id: resUser.uuid}, process.env.SECRET, {
+                    expiresIn: '10m'
                     // expiresIn: 10
                 })
 
@@ -98,6 +98,28 @@ module.exports = {
             }
 
             return false
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    },
+    async verifyToken(req){
+        try {
+            const token = req.headers['x-access-token']
+            if (!token) return false
+            return token
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    },
+    async validateToken(token){
+        try {
+            jwt.verify(token, process.env.SECRET, (err, decoded) => {
+                if (err) return false
+                console.log(decoded)
+                return decoded
+            })
         } catch (error) {
             console.log(error)
             return false
