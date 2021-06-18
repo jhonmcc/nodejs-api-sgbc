@@ -17,12 +17,15 @@ routesUser.get('/', async (req, res) => {
     await userController.find(req, res)
 })
 routesUser.post('/', async (req, res) => {
+    await userController.verifyToken(req, res)
     await userController.create(req, res)
 })
 routesUser.put('/', async (req, res) => {
+    await userController.verifyToken(req, res)
     await userController.update(req, res)
 })
 routesUser.delete('/', async (req, res) => {
+    await userController.verifyToken(req, res)
     await userController.delete(req, res)
 })
 routesUser.post('/login', async (req, res, next) => {
