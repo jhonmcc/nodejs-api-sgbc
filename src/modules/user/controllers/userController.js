@@ -1,4 +1,4 @@
-const { verifyToken } = require('./userMethods')
+const { verifyToken, findAll } = require('./userMethods')
 const userMethods = require('./userMethods')
 
 module.exports = {
@@ -23,6 +23,13 @@ module.exports = {
             res.send({ message: 'Nao foi possivel deletar o cadastro verifique se as informacoes estao corretas'})
         }
         res.send({ delete: 'success' })
+    },
+    async findAll(req, res){
+        let result = await userMethods.findAll()
+        if (result == false){
+            res.send({ message: 'Nao foi possivel localizar o usuario ou senha estao incorretos.'})
+        }
+        res.status(200).json(result)
     },
     async find(req, res){
         // await userMethods.findUser(req)

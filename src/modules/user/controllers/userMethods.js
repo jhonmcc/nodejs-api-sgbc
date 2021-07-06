@@ -76,8 +76,11 @@ module.exports = {
     },
     async findAll(req){
         try {
-            const findOne = await userModel.findAll()
-            return findOne
+            const findAll = await userModel.findAll({
+                limit: req.query.limit,
+                offset: req.query.page
+            })
+            return findAll
         } catch (error) {
             return error
         }
