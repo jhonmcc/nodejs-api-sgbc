@@ -25,9 +25,9 @@ module.exports = {
         res.send({ delete: 'success' })
     },
     async findAll(req, res){
-        let result = await userMethods.findAll()
+        let result = await userMethods.findAll(req)
         if (result == false){
-            res.send({ message: 'Nao foi possivel localizar o usuario ou senha estao incorretos.'})
+            res.send({ message: 'Nao ha mais dados'})
         }
         res.status(200).json(result)
     },

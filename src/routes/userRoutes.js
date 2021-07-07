@@ -12,7 +12,7 @@ const userController = require('../modules/user/controllers/userController')
 //         JSON.stringify(req.query.id)
 //     )
 // })
-routesUser.get('/all/', async (req, res) => {
+routesUser.get('/all', async (req, res) => {
     // await userController.verifyToken(req, res)
     await userController.findAll(req, res)
 })

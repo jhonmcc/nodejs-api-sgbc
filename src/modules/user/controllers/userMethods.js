@@ -76,10 +76,24 @@ module.exports = {
     },
     async findAll(req){
         try {
-            const findAll = await userModel.findAll({
-                limit: req.query.limit,
-                offset: req.query.page
-            })
+            let findAll
+            if (req.query.limit == undefined){
+                findAll = await userModel.findAll()
+            }
+            else {
+                if (parseInt(req.query.page) == 0){
+                    findAll = await userModel.findAll({
+                        limit: parseInt(req.query.limit),
+                        offset: parseInt(req.query.page)
+                    })
+                }
+                else {
+                    findAll = await userModel.findAll({
+                        limit: parseInt(req.query.limit),
+                        offset: parseInt(req.query.page) + 1
+                    })
+                }
+            }
             return findAll
         } catch (error) {
             return error
