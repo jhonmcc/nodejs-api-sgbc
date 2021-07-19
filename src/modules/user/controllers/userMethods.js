@@ -106,9 +106,9 @@ module.exports = {
             if (resUser == null){
                 return false
             }
-            else if (bcryptjs.compareSync(req.body.password, resUser.password)){
+            else if (bcryptjs.compare(req.body.password, resUser.password)){
                 const token = jwt.sign({id: resUser.uuid}, process.env.SECRET, {
-                    expiresIn: '1m'
+                    expiresIn: 180
                     // expiresIn: 10
                 })
 
@@ -133,11 +133,8 @@ module.exports = {
     },
     async validateToken(token){
         try {
-            jwt.verify(token, process.env.SECRET, (err, decoded) => {
-                if (err) return false
-                console.log(decoded)
-                return decoded
-            })
+            let decoded = await jwt.verify(token, process.env.SECRET)
+            return decoded
         } catch (error) {
             console.log(error)
             return false

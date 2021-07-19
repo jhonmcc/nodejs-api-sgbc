@@ -47,17 +47,15 @@ module.exports = {
         res.status(200).json(result)
     },
     async verifyToken(req, res){
-        const token = await userMethods.verifyToken(req)
+        let token = await userMethods.verifyToken(req)
         if (token == false){
-            res.status(401).json({ message: 'Token nao fornecido'})
+            res.status(401).json({ message: 'Token nao localizado'})
         }
 
-        const validate = await userMethods.validateToken(token)
+        let validate = await userMethods.validateToken(token)
         if (validate == false){
-            console.log(validate)
-            res.status(401).json({ message: 'Falha na autenticacao do token'})
+            res.status(401).json({ auth: false, message: 'Falha na autenticacao do token'})
         }
-        return validate
     }
 
 }
