@@ -1,6 +1,7 @@
 const userModel = require('../models/userModel')
 const uuid = require('uuid')
 const jwt = require('jsonwebtoken')
+const bcryptjs = require('bcryptjs')
 const { Op } = require('sequelize')
 
 // require dotenv 
@@ -10,7 +11,6 @@ module.exports = {
     async createUser(req){
         try {
             // const resCreate = await userModel.create({
-            console.log(req.body)
             const [resCreate, created] = await userModel.findOrCreate({
                 where: {
                     [Op.or]: [
@@ -20,7 +20,8 @@ module.exports = {
                 defaults: {
                     uuid: uuid.v4(),
                     user: req.body.user,
-                    password: req.body.password,
+                    // password: await this.generatePassword(6),
+                    password: bcryptjs.hashSync(req.body.password),
                     email: req.body.email,
                     full_name: req.body.full_name,
                     access: req.body.access,
@@ -105,9 +106,9 @@ module.exports = {
             if (resUser == null){
                 return false
             }
-            else if (resUser.password == req.body.password){
+            else if (bcryptjs.compareSync(req.body.password, resUser.password)){
                 const token = jwt.sign({id: resUser.uuid}, process.env.SECRET, {
-                    expiresIn: '10m'
+                    expiresIn: '1m'
                     // expiresIn: 10
                 })
 
@@ -141,5 +142,14 @@ module.exports = {
             console.log(error)
             return false
         }
+    },
+    async generatePassword(length){
+        let result = '';
+        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+        let charactersLength = characters.length
+        for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength))
+        }
+        return result;
     }
 }

@@ -7,8 +7,8 @@ module.exports = {
         if (result == false){
             res.send({message: 'Nao foi possivel efetuar o cadastro campos imcompletos ou o cadastro ja existe'})
         }
-        
         res.send({create: 'success'})
+        // res.status(200).json(result.password)
     },
     async update(req, res){
         let result = await userMethods.updateUser(req)
